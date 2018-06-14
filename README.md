@@ -48,7 +48,7 @@ Post原始的字符串内容到服务器,需要自己根据内容类型设置合
 
 声明如下:
 
-`PostBody(URL, bodyData, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string`
+`PostBody(URL, bodyData, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string)`
 
 bodyData: 字符串,需要发送的数据,数据不会经过任何处理,直接发送给服务器.
 
@@ -60,7 +60,7 @@ Post发送JSON字符串内容到服务器,请求时会设置头部:Content-Type:
 
 声明如下:
 
-`PostBody(URL, jsonData, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string`
+`PostBody(URL, jsonData, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string)`
 
 jsonData: 字符串,需要发送的数据,数据不会经过任何处理,直接发送给服务器.
 
@@ -72,8 +72,7 @@ Post发送XML字符串内容到服务器,请求时会设置头部:Content-Type: 
 
 声明如下:
 
-`PostXML(URL, xmlData, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string`
-
+`PostXML(URL, xmlData, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string)`
 xmlData: 字符串,需要发送的数据,数据不会经过任何处理,直接发送给服务器.
 
 ### PostForm
@@ -84,7 +83,7 @@ Post发送经过编码的表单内容到服务器,json格式的formData会被处
 
 声明如下:
 
-`PostXML(URL, formData, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string`
+`PostXML(URL, formData, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string)`
 
 formData: 字符串,需要发送的数据,数据会被处理为表单数据然后编码发送给服务器.
 
@@ -96,7 +95,7 @@ formData: 字符串,需要发送的数据,数据会被处理为表单数据然�
 
 声明如下:
 
-`Get(URL, jsonParams, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string`
+`Get(URL, jsonParams, jsonHeader, timeout, base64body, tlsJsonConfig string) (resultJSON string)`
 
 jsonParams: 字符串,需要附加到URL后面的参数,json格式的数据,一个json对象,键值都必须是字符串类型.
     比如:{"uid":"123"}
