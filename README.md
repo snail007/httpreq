@@ -25,6 +25,8 @@ jsonHeader: 字符串,需要设置的请求头,json格式的数据,一个json对
 
 timeout: 字符串,内容是数字,请求的超时时间,单位是毫秒,比如:500
 
+base64body: 字符串,返回的内容是否进行base64编码.1:编码,0:不编码,默认:0
+
 tlsJsonConfig:字符串,https请求的时候,需要的一些配置,json格式的数据,一个json对象它的结构如下:
     {
         Key             string //pem格式的key文件的文本内容
