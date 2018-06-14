@@ -8,6 +8,7 @@
 *.key
 # Test binary, build with `go test -c`
 *.test
+*.tar.gz
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
