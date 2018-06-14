@@ -14,7 +14,8 @@ func TestPost(t *testing.T) {
 	conf := tlsConfig{
 		CheckCert:       "1",
 		CheckServerName: "0",
-		Ca:              string(caStringB),
+		UseSystemCert:   "1",
+		Cas:             []string{string(caStringB)},
 		Cert:            string(certStringB),
 		Key:             string(keyStringB),
 	}
@@ -37,5 +38,6 @@ func TestPost(t *testing.T) {
 		t.Fatal(r.ErrorMessage)
 	} else {
 		fmt.Printf("StatusCode:%d,Body:%s\n", r.StatusCode, r.Body)
+		t.Fail()
 	}
 }

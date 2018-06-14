@@ -24,7 +24,8 @@ const (
 type tlsConfig struct {
 	Key             string
 	Cert            string
-	Ca              string
+	Cas             []string
+	UseSystemCert   string
 	CheckServerName string
 	CheckCert       string
 }
@@ -33,6 +34,10 @@ type result struct {
 	ErrorMessage string
 	Body         string
 	Headers      map[string][]string
+}
+
+func Version() string {
+	return version
 }
 
 func Get(URL, jsonParams, jsonHeader, timeout, base64body, tlsJsonConfig string) (result string) {
@@ -121,7 +126,11 @@ func request(method, URL, paramsString, jsonHeader, timeout, base64body, tlsJson
 		}
 		u, _ := url.Parse(URL)
 		serverName := u.Hostname()
-		conf, err := getRequestTlsConfig([]byte(tlsConfig0.Cert), []byte(tlsConfig0.Key), []byte(tlsConfig0.Ca), serverName, tlsConfig0.CheckServerName == "1", tlsConfig0.CheckCert == "1")
+		cas := [][]byte{}
+		for _, ca := range tlsConfig0.Cas {
+			cas = append(cas, []byte(ca))
+		}
+		conf, err := getRequestTlsConfig([]byte(tlsConfig0.Cert), []byte(tlsConfig0.Key), cas, serverName, tlsConfig0.UseSystemCert != "0", tlsConfig0.CheckServerName == "1", tlsConfig0.CheckCert == "1")
 		if err != nil {
 			ret0.ErrorMessage = err.Error()
 			return
@@ -182,15 +191,26 @@ func request(method, URL, paramsString, jsonHeader, timeout, base64body, tlsJson
 	return
 }
 
-func getRequestTlsConfig(certBytes, keyBytes, caCertBytes []byte, serverName string, checkServerName, checkCert bool) (conf *tls.Config, err error) {
+func getRequestTlsConfig(certBytes, keyBytes []byte, caCertBytes [][]byte, serverName string, useSystemCert, checkServerName, checkCert bool) (conf *tls.Config, err error) {
 	conf = &tls.Config{ServerName: serverName}
+	var serverCertPool *x509.CertPool
 
-	serverCertPool := x509.NewCertPool()
-	if caCertBytes != nil && len(caCertBytes) > 0 {
-		ok := serverCertPool.AppendCertsFromPEM(caCertBytes)
-		if !ok {
-			err = errors.New("failed to parse root certificate")
+	if useSystemCert {
+		serverCertPool, err = x509.SystemCertPool()
+		if err != nil {
 			return
+		}
+	} else {
+		serverCertPool = x509.NewCertPool()
+	}
+
+	if caCertBytes != nil && len(caCertBytes) > 0 && len(caCertBytes[0]) > 0 {
+		for _, ca := range caCertBytes {
+			ok := serverCertPool.AppendCertsFromPEM(ca)
+			if !ok {
+				err = errors.New("failed to parse root certificate")
+				return
+			}
 		}
 	}
 	conf.RootCAs = serverCertPool
