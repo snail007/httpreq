@@ -32,7 +32,7 @@ tlsJsonConfig:字符串,https请求的时候,需要的一些配置,json格式的
 ```json
 {
     Key             string //pem格式的key文件的文本内容
-    Cert            string  //pem格式的crt根证书文件的文本内容
+    Cert            string  //pem格式的crt证书文件的文本内容
     Cas              []string //字符串数组,值是pem格式的ca根证书文件的文本内容,用于对服务器的证书的检查
     UseSystemCert   string   //是否加载系统的信任证书,用于对服务器的证书的检查,1:加载,0:不加载,默认:1
     CheckServerName string    //是否检查ServerName,1:检查,0:不检查,默认:0
