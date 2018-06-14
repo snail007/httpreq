@@ -1,5 +1,5 @@
 #/bin/bash
-VER="v1.0"
+VER="v1.1"
 rm -rf httpreq-android-*.tar.gz
 rm -rf android
 mkdir android
