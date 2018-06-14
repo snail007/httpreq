@@ -28,16 +28,18 @@ timeout: 字符串,内容是数字,请求的超时时间,单位是毫秒,比如:
 base64body: 字符串,返回的内容是否进行base64编码.1:编码,0:不编码,默认:0
 
 tlsJsonConfig:字符串,https请求的时候,需要的一些配置,json格式的数据,一个json对象它的结构如下:
-    ```json
-    {
-        Key             string //pem格式的key文件的文本内容
-        Cert            string  //pem格式的crt根证书文件的文本内容
-        Cas              []string //字符串数组,值是pem格式的ca根证书文件的文本内容,用于对服务器的证书的检查
-        UseSystemCert   string   //是否加载系统的信任证书,用于对服务器的证书的检查,1:加载,0:不加载,默认:1
-        CheckServerName string    //是否检查ServerName,1:检查,0:不检查,默认:0
-        CheckCert       string //是否检查服务器证书,1:检查,0:不检查,默认:0
-    }
-    ```
+
+```json
+{
+    Key             string //pem格式的key文件的文本内容
+    Cert            string  //pem格式的crt根证书文件的文本内容
+    Cas              []string //字符串数组,值是pem格式的ca根证书文件的文本内容,用于对服务器的证书的检查
+    UseSystemCert   string   //是否加载系统的信任证书,用于对服务器的证书的检查,1:加载,0:不加载,默认:1
+    CheckServerName string    //是否检查ServerName,1:检查,0:不检查,默认:0
+    CheckCert       string //是否检查服务器证书,1:检查,0:不检查,默认:0
+}
+```
+
     说明:
 
     所有的配置都不是必须传递的,根据情况设置.
