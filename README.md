@@ -44,9 +44,9 @@ tlsJsonConfig:字符串,https请求的时候,需要的一些配置,json格式的
 
     所有的配置都不是必须传递的,根据情况设置.
 
-    1.tls双向认证的时候,如果要检查证书,必须设置Key,Cert,Ca,CheckCert
+    1.tls双向认证的时候,如果要检查服务器的证书,必须设置Key,Cert,Ca,CheckCert
 
-    2.单向认证的时候,如果要检查证书,必须设置Ca,CheckCert
+    2.单向认证的时候,如果要检查服务器的证书,必须设置Ca,CheckCert
 
 ### PostBody
 
