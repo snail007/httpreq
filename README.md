@@ -17,7 +17,7 @@ http request for ios &amp; android
 }
 ```
 
-所有方法都如如下几个参数,这里统一说明:
+所有方法都有如下几个参数,这里统一说明:
 
 URL: 字符串,请求的URL地址,必须是http://或者https://开头.
 
