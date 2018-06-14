@@ -1,5 +1,5 @@
 #/bin/bash
-VER="v1.1"
+VER="v1.2"
 rm -rf httpreq-ios-*.tar.gz
 rm -rf ios
 mkdir ios

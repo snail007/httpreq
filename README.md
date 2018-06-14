@@ -107,3 +107,33 @@ formData: 字符串,需要发送的数据,数据会被处理为表单数据然�
 
 jsonParams: 字符串,需要附加到URL后面的参数,json格式的数据,一个json对象,键值都必须是字符串类型.
     比如:{"uid":"123"}
+
+## 异步处理
+
+Get,PostBody,PostJSON,PostXML,PostForm均有对应的异步方法,异步方法的参数和同步的一致,只是最后多了一个callback回调参数,没有返回值.
+
+它们声明如下:
+
+`GetAsync(URL, jsonParams, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback)`
+
+`PostBodyAsync(URL, bodyData, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback)`
+
+`PostJSONAsync(URL, jsonData, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback)`
+
+`PostXMLAsync(URL, xmlData, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback)`
+
+`PostFormAsync(URL, formData, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback)`
+
+参数说明:
+
+callback: 是实现了Callback接口的任意对象
+
+Callback接口定义如下:
+
+```go
+type Callback interface {
+   OnDone(resultJSON string)
+}
+```
+
+任意类只需要实现这个接口的OnDone方法即可,resultJSON就是返回结果,结构请看本文档开始的[方法参数说明](#方法参数说明).

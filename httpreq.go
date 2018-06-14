@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	version = "1.1"
+	version = "1.2"
 )
 
 type tlsConfig struct {
@@ -35,11 +35,38 @@ type result struct {
 	Body         string
 	Headers      map[string][]string
 }
+type Callback interface {
+	OnDone(result string)
+}
 
 func Version() string {
 	return version
 }
-
+func GetAsync(URL, jsonParams, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback) {
+	go func() {
+		callback.OnDone(Get(URL, jsonParams, jsonHeader, timeout, base64body, tlsJsonConfig))
+	}()
+}
+func PostBodyAsync(URL, bodyData, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback) {
+	go func() {
+		callback.OnDone(PostBody(URL, bodyData, jsonHeader, timeout, base64body, tlsJsonConfig))
+	}()
+}
+func PostJSONAsync(URL, jsonData, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback) {
+	go func() {
+		callback.OnDone(PostJSON(URL, jsonData, jsonHeader, timeout, base64body, tlsJsonConfig))
+	}()
+}
+func PostXMLAsync(URL, xmlData, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback) {
+	go func() {
+		callback.OnDone(PostXML(URL, xmlData, jsonHeader, timeout, base64body, tlsJsonConfig))
+	}()
+}
+func PostFormAsync(URL, formData, jsonHeader, timeout, base64body, tlsJsonConfig string, callback Callback) {
+	go func() {
+		callback.OnDone(PostForm(URL, formData, jsonHeader, timeout, base64body, tlsJsonConfig))
+	}()
+}
 func Get(URL, jsonParams, jsonHeader, timeout, base64body, tlsJsonConfig string) (result string) {
 	paramsString := ""
 	jsonDataMap := map[string]string{}
